@@ -14,8 +14,8 @@ app.use(cors({
     'http://localhost:3000', 
     'http://127.0.0.1:3000',
     'https://localhost:3000',
-    'https://flow-pay-jet.vercel.app',
-    'https://flow-pay-jet.vercel.app/'
+    'https://paysense-cyvu.vercel.app',
+    'https://paysense-cyvu.vercel.app/'
   ],
   credentials: true,
   methods: ['GET', 'POST', 'PUT', 'PATCH', 'DELETE', 'OPTIONS'],
