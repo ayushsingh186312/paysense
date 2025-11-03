@@ -9,6 +9,7 @@ import { RecentTransactions } from "@/components/recent-transactions"
 import { Analytics } from "@/components/analytics"
 import { RiskSummaryCard } from "@/components/risk-summary-card"  
 import { usePaymentStore } from "@/store/payment-store"
+import { Graphics } from "@/components/graphics"
 
 export default function Home() {
   const { backendConnected, initialized, loading } = usePaymentStore()
@@ -41,13 +42,14 @@ export default function Home() {
         
         <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
           <div className="lg:col-span-2 space-y-6">
+            <Graphics />
             <PaymentTabs />
-            <RecentTransactions />
+           
           </div>
           
           <div className="space-y-6">
             <PaymentCalendar />
-            <RiskSummaryCard />  
+            <RecentTransactions />
             <Analytics />
           </div>
         </div>
