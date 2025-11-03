@@ -255,7 +255,7 @@ Each cheque shows associated client's risk level:
 - ✅ Complete denomination tracking
 
 ---
-### 3.4 Cash Management System ✅
+### 3.4 Online Management System ✅
 
 **Problem Solved**: Unorganized rough transaction recording and fake payments risk
 
