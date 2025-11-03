@@ -41,7 +41,7 @@ The B2B Payment Management System is a comprehensive digital solution designed f
 ### Key Highlights
 
 - 📊 **Real-time Dashboard** - Complete visibility of payment status with 4 key metrics
-- 💰 **Dual Payment Support** - Manage both cheques and cash seamlessly
+- 💰 **Triple Payment Support** - Manage online, cheques and cash seamlessly
 - 🤖 **OCR Cheque Scanning** - Extract data automatically from cheque images (90% time saved)
 - 📈 **Risk Management** - Automated client risk scoring (0-100 scale)
 - 🔔 **Smart Reminders** - Automated PDC email notifications (7 days before due)
@@ -85,6 +85,7 @@ The B2B Payment Management System is a comprehensive digital solution designed f
   - Pending Cheques count
   - Monthly Cleared amount
   - Bounce Rate percentage
+- Graphical Analytics
 - Live backend connection indicator
 - Auto-refresh capability
 - Color-coded status visualization
@@ -114,7 +115,7 @@ The B2B Payment Management System is a comprehensive digital solution designed f
 - Historical record viewing
 - Duplicate cheque number validation
 
-#### 3. **Cash Management**
+#### 3. **Online and Cash Management**
 - ✅ Digital receipt generation
 - ✅ **Denomination Breakdown**: Track ₹2000, ₹500, ₹200, ₹100, ₹50, ₹20, ₹10
 - ✅ **Fake Currency Checklist**: 7-point verification system
@@ -129,6 +130,7 @@ The B2B Payment Management System is a comprehensive digital solution designed f
 - ✅ Bank deposit tracking
 - ✅ Receipt download (HTML)
 - ✅ Print-ready format
+
 
 #### 4. **Client Management** 🆕
 - **Client Registration**:
@@ -167,43 +169,6 @@ The B2B Payment Management System is a comprehensive digital solution designed f
   - Customizable templates
   - Retry logic
   - Delivery logging
-
-#### 6. **Automated Reconciliation Engine** 🆕
-- **Invoice Management**:
-  - Create invoices
-  - Track payment status
-  - Multi-payment support
-- **Auto-Matching Algorithm**:
-  - Client match: 40% weight
-  - Amount match: 35% weight (±2% tolerance)
-  - Date match: 15% weight (±7 days)
-  - Name similarity: 10% weight
-  - Auto-reconcile if score ≥ 50%
-- **Reconciliation Report**:
-  - Matched payments list
-  - Unmatched payments
-  - Match scores
-  - Discrepancy alerts
-
-#### 7. **Advanced Features**
-- 📅 **Payment Calendar**: Upcoming payments (next 30 days)
-- 📊 **Recent Activity**: Last 5 transactions with color coding
-- 📈 **Analytics**: Collection time, risk scores, accuracy metrics
-- 🔄 **Real-time Updates**: No page refresh needed
-- 🌐 **Backend Integration**: MongoDB with Mongoose
-- 🔔 **Connection Status**: Live backend availability indicator
-
-### 🎨 UI/UX Features
-
-- **Modern Design**: Gradient-based professional interface
-- **Glassmorphism**: Backdrop blur effects
-- **Dark/Light Theme**: Toggle between themes
-- **Responsive Layout**: Mobile, tablet, desktop optimized
-- **Smooth Animations**: Professional transitions
-- **Color-coded Status**: Visual indicators for all states
-- **Loading States**: User feedback for all actions
-- **Toast Notifications**: Success/error messages
-- **Accessible**: ARIA labels, keyboard navigation
 
 ---
 
@@ -305,7 +270,7 @@ Store Update → UI Re-render → Toast Notification
 #### 1. Clone Repository
 
 ```bash
-git clone https://github.com/SahilKishor21/FlowPay
+git clone https://github.com/ayushsingh186312/paysense
 cd payment-management-system
 ```
 
@@ -683,7 +648,8 @@ payment-management-system/
 │   │   ├── add-payment-dialog.tsx
 │   │   ├── add-client-dialog.tsx
 │   │   ├── cheque-list.tsx
-│   │   ├── cash-list.tsx
+│   │   ├── cash-list.ts
+│   │   ├── online-list.ts
 │   │   ├── client-selector.tsx
 │   │   ├── ocr-upload.tsx
 │   │   ├── fake-currency-checklist.tsx
@@ -701,12 +667,14 @@ payment-management-system/
 ├── backend/
 │   ├── models/
 │   │   ├── Cheque.model.js
+│   │   ├── Online.model.js
 │   │   ├── Cash.model.js
 │   │   ├── Client.model.js
 │   │   └── Invoice.model.js
 │   ├── routes/
 │   │   ├── cheque.routes.js
 │   │   ├── cash.routes.js
+│   │   ├── online.routes.js
 │   │   ├── client.routes.js
 │   │   ├── invoice.routes.js
 │   │   ├── ocr.routes.js
@@ -723,37 +691,8 @@ payment-management-system/
 └── .gitignore
 ```
 
----
 
-## 🤝 Contributing
-
-We welcome contributions! Please follow these steps:
-
-1. Fork the repository
-2. Create feature branch: `git checkout -b feature/AmazingFeature`
-3. Commit changes: `git commit -m 'Add AmazingFeature'`
-4. Push to branch: `git push origin feature/AmazingFeature`
-5. Open Pull Request
-
-### Coding Standards
-
-- Use TypeScript for new frontend code
-- Follow ESLint configuration
-- Write meaningful commit messages
-- Add tests for new features
-- Update documentation
-
----
-
-## 📄 License
-
-This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
-
----
-
-## 👥 Team
-
-**Developed by**: Sahil
+**Developed by**: Ayush Singh
 
 ---
 
@@ -772,6 +711,7 @@ This project is licensed under the MIT License - see the [LICENSE](LICENSE) file
 
 ### ✅ Completed (Current Version)
 - Dashboard with real-time analytics
+- Online management
 - Cheque management with OCR
 - Cash management with denomination tracking
 - Client management with risk scoring
@@ -786,14 +726,6 @@ This project is licensed under the MIT License - see the [LICENSE](LICENSE) file
 - User management
 - Advanced search and filters
 - Pagination for large datasets
-
-### 📅 Planned (Next Quarter)
-- Mobile app (React Native)
-- Bank API integration
-- Multi-currency support
-- ERP integration (Tally, QuickBooks)
-- Advanced analytics dashboard
-- Custom reporting engine
 
 ---
 
