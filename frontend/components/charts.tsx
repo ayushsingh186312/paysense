@@ -23,7 +23,7 @@ export default function Charts({ status }: Props) {
 
   useEffect(() => {
     axios
-      .get("http://localhost:5001/api/payments/dashboard")
+      .get(`${process.env.NEXT_PUBLIC_API_URL || 'http://localhost:5001/api'}/payments/dashboard`)
       .then((res) => setData(res.data.monthlySummary || []))
       .catch((err) => console.error(err));
   }, []);
