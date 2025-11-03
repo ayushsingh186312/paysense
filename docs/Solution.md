@@ -10,6 +10,7 @@ Insyd Labs' B2B vertical serves AEC (Architecture, Engineering, and Construction
 
 - **Cheques** (especially Post-Dated Cheques/PDCs) - accounting for up to 50% of payment volumes
 - **Cash payments** - popular for familiarity and unaccounted transactions
+- **Online payments** - popular for eassy transactions
 
 ### Current Challenges
 
@@ -254,8 +255,23 @@ Each cheque shows associated client's risk level:
 - ✅ Complete denomination tracking
 
 ---
+### 3.4 Cash Management System ✅
 
-### 3.4 Client Management Module ✅ IMPLEMENTED
+**Problem Solved**: Unorganized rough transaction recording and fake payments risk
+
+**Features Implemented**:
+
+#### A. Recording Online Payments
+
+- Client selection (optional - can enter manually)
+- Receipt number (auto-generated unique ID)
+- Date of transaction
+- Total amount
+- Denomination breakdown tracking
+- Verification workflow
+- Bank deposit status tracking
+
+### 3.5 Client Management Module ✅ IMPLEMENTED
 
 **Problem Solved**: No systematic way to track client payment behavior and risk
 
@@ -296,10 +312,6 @@ Where:
 - Transaction Volume = Inverse score (fewer transactions = higher risk)
 ```
 
-**Risk Levels**:
-- **Low Risk (0-30)**: Green indicator, normal payment terms
-- **Medium Risk (31-60)**: Yellow indicator, requires 50% advance
-- **High Risk (61-100)**: Red indicator, cash only recommended
 
 **Automatic Recalculation**:
 - Triggered after every cheque status change
@@ -926,6 +938,17 @@ http://localhost:5000/api
 | PATCH | `/cash/:id/verify` | Verify transaction |
 | DELETE | `/cash/:id` | Delete transaction |
 
+### Online Endpoints
+
+| Method | Endpoint | Description |
+|--------|----------|-------------|
+| GET | `/online` | Get all online transactions |
+| GET | `/online/:id` | Get transaction by ID |
+| POST | `/online` | Create new transaction |
+| PUT | `/online/:id` | Update transaction |
+| PATCH | `/online/:id/verify` | Verify transaction |
+| DELETE | `/online/:id` | Delete transaction |
+
 ### Invoice Endpoints
 
 | Method | Endpoint | Description |
@@ -1009,6 +1032,7 @@ http://localhost:5000/api
 |---|---------|--------|--------|
 | 1 | Dashboard Statistics | ✅ Complete | Real-time visibility |
 | 2 | Cheque Management | ✅ Complete | Organized tracking |
+| 2 | Online Management | ✅ Complete | Efficient tracking |
 | 3 | Cash Management | ✅ Complete | Digital records |
 | 4 | OCR Cheque Scanning | ✅ Complete | 90% time saved |
 | 5 | Client Management | ✅ Complete | Risk monitoring |
@@ -1023,7 +1047,6 @@ http://localhost:5000/api
 | 14 | Denomination Breakdown | ✅ Complete | Cash reconciliation |
 | 15 | Fake Currency Checklist | ✅ Complete | Loss prevention |
 | 16 | Auto Reconciliation | ✅ Complete | Instant matching |
-| 17 | Invoice Management | ✅ Complete | Payment tracking |
 | 18 | Responsive Design | ✅ Complete | Multi-device |
 | 19 | Dark Mode | ✅ Complete | User preference |
 | 20 | Real-time Updates | ✅ Complete | No refresh needed |
@@ -1046,25 +1069,6 @@ http://localhost:5000/api
 | Dashboard Creation | 1 hour | Real-time | Instant |
 | Bounce Tracking | Notebook | Database | 100% accurate |
 | Missing PDCs | 15% | <2% | 87% reduction |
-
-### Time Savings (Monthly)
-
-- **Data Entry**: 15 hours saved
-- **Status Updates**: 8 hours saved
-- **Follow-ups**: 20 hours saved
-- **Reconciliation**: 48 hours saved
-- **Reporting**: 16 hours saved
-
-**Total Monthly Savings**: 107 hours (≈ 2.5 weeks of work)
-
-### Financial Impact (Annual Estimate)
-
-- Prevented bounced cheques: ₹1,50,000
-- Improved collections: ₹5,00,000
-- Reduced fake notes: ₹20,000
-- Time saved value: ₹3,00,000
-
-**Total Annual Value**: ₹9,70,000+
 
 ---
 
@@ -1123,8 +1127,8 @@ Database: MongoDB Atlas (cloud) or local MongoDB
 ### Production Recommendations
 
 ```
-Frontend: Vercel (automatic from GitHub)
-Backend: Railway.app or Render.com
+Frontend: Vercel 
+Backend: Vercel 
 Database: MongoDB Atlas (M2 or higher)
 File Storage: AWS S3 or Cloudinary (for cheque images)
 Email: SendGrid or AWS SES (for production)
