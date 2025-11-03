@@ -17,7 +17,7 @@ export function PaymentTabs() {
       </CardHeader>
       <CardContent>
         <Tabs defaultValue="cheques" className="w-full">
-          <TabsList className="grid w-full grid-cols-2 bg-slate-100 dark:bg-slate-800">
+          <TabsList className="grid w-full grid-cols-3 bg-slate-100 dark:bg-slate-800">
             <TabsTrigger value="cheques">Cheques</TabsTrigger>
             <TabsTrigger value="cash">Cash</TabsTrigger>
             <TabsTrigger value="online">Online</TabsTrigger>

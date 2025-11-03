@@ -35,7 +35,7 @@ export function AddPaymentDialog() {
   const [selectedClient, setSelectedClient] = useState("");
   const [ocrData, setOcrData] = useState<any>(null);
 
-  const { addCheque, addCashTransaction, clients } = usePaymentStore();
+  const { addCheque, addCashTransaction, addOnlineTransaction, clients } = usePaymentStore();
   const { toast } = useToast();
 
   const handleOCRDataExtracted = (data: any) => {
@@ -97,7 +97,29 @@ export function AddPaymentDialog() {
           title: "✅ Payment Added Successfully",
           description: "Cheque has been recorded in the database.",
         });
-      } else {
+      } else if (paymentType === "online") {
+        const onlineData: any = {
+          clientName:
+            (formData.get("clientName") as string) || selectedClientData?.name,
+          receiptNumber: formData.get("receiptNumber") as string,
+          paymentMethod: formData.get("paymentMethod") as string,
+          amount: parseFloat(formData.get("amount") as string),
+          date: formData.get("date") as string,
+          status: formData.get("status") || status,
+        }
+
+        if (selectedClient && selectedClient.trim() !== "") {
+          onlineData.clientId = selectedClient
+        }
+
+        await addOnlineTransaction(onlineData)
+
+        toast({
+          title: "✅ Online Payment Added",
+          description: "Online transaction has been recorded successfully.",
+        })
+      }
+      else {
         const denominations = [
           {
             value: 2000,
@@ -218,6 +240,7 @@ export function AddPaymentDialog() {
                 <SelectContent>
                   <SelectItem value="cheque">Cheque</SelectItem>
                   <SelectItem value="cash">Cash</SelectItem>
+                  <SelectItem value="online">Online</SelectItem>
                 </SelectContent>
               </Select>
             </div>
@@ -331,6 +354,54 @@ export function AddPaymentDialog() {
                     </SelectContent>
                   </Select>
                 </div>
+              </>
+            ) : paymentType === "online" ? (
+              <>
+                <div className="space-y-2">
+                  <Label htmlFor="receiptNumber">Transaction / Reference ID</Label>
+                  <Input id="receiptNumber" name="receiptNumber" required />
+                </div>
+
+                <div className="space-y-2">
+                  <Label htmlFor="paymentMethod">Payment Method</Label>
+                  <Select name="paymentMethod" defaultValue="UPI">
+                    <SelectTrigger>
+                      <SelectValue placeholder="Select method" />
+                    </SelectTrigger>
+                    <SelectContent>
+                      <SelectItem value="UPI">UPI</SelectItem>
+                      <SelectItem value="Card">Card</SelectItem>
+                      <SelectItem value="NetBanking">Net Banking</SelectItem>
+                      <SelectItem value="Wallet">Wallet</SelectItem>
+                    </SelectContent>
+                  </Select>
+                </div>
+
+                <div className="space-y-2">
+                  <Label htmlFor="amount">Amount (₹)</Label>
+                  <Input id="amount" name="amount" type="number" step="0.01" required />
+                </div>
+
+                <div className="space-y-2">
+                  <Label htmlFor="date">Payment Date</Label>
+                  <Input id="date" name="date" type="date" required />
+                </div>
+
+                <div className="space-y-2">
+                  <Label>Status</Label>
+                  <Select value={status} onValueChange={setStatus}>
+                    <SelectTrigger>
+                      <SelectValue placeholder="Select status" />
+                    </SelectTrigger>
+                    <SelectContent>
+                      <SelectItem value="Pending">Pending</SelectItem>
+                      <SelectItem value="Success">Success</SelectItem>
+                      <SelectItem value="Failed">Failed</SelectItem>
+                      <SelectItem value="Refunded">Refunded</SelectItem>
+                    </SelectContent>
+                  </Select>
+                </div>
+
               </>
             ) : (
               <>
