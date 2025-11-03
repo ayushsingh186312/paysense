@@ -1,6 +1,10 @@
 import axios from 'axios'
 
+<<<<<<< HEAD
 const API_URL =  process.env.NEXT_PUBLIC_API_URL || 'http://localhost:5001/api'
+=======
+const API_URL = 'https://paysense-theta.vercel.app/api'
+>>>>>>> ddbd6e0de55231e455f63f40c671b93c1229f942
 
 const api = axios.create({
   baseURL: API_URL,
