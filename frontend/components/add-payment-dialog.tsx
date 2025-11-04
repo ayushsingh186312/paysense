@@ -212,7 +212,7 @@ export function AddPaymentDialog() {
     <>
       <Dialog open={open} onOpenChange={setOpen}>
         <DialogTrigger asChild>
-          <Button className="bg-gradient-to-r from-blue-600 to-purple-600 hover:from-blue-700 hover:to-purple-700">
+          <Button className="bg-gradient-to-r from-pink-500 via-orange-400 to-yellow-300 hover:from-pink-600 hover:via-orange-500 hover:to-yellow-400">
             <Plus className="h-4 w-4 mr-2" />
             Add Payment
           </Button>

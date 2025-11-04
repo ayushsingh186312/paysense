@@ -39,7 +39,7 @@ export function DashboardHeader() {
       <div className="w-full bg-white/50 dark:bg-slate-900/50 backdrop-blur-lg p-6 rounded-2xl border border-white/20 dark:border-slate-800/50 shadow-xl">
         <div className="flex flex-row flex-nowrap justify-between items-center gap-4 w-full overflow-x-auto">
           <div className="min-w-0">
-            <h1 className="text-3xl md:text-4xl font-bold bg-gradient-to-r from-blue-600 via-purple-600 to-pink-600 bg-clip-text text-transparent">
+            <h1 className="text-3xl md:text-4xl font-bold bg-gradient-to-r from-pink-500 via-orange-400 to-yellow-300 bg-clip-text text-transparent">
               Payment Sense
             </h1>
             <p className="text-sm text-muted-foreground mt-1 truncate">
