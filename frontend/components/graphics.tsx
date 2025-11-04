@@ -10,7 +10,7 @@ export function Graphics() {
     <Card className="bg-white/50 dark:bg-slate-900/50 backdrop-blur-lg border-white/20 dark:border-slate-800/50 shadow-xl">
       <CardHeader className="flex flex-row items-center justify-between">
         <CardTitle className="text-xl font-bold bg-gradient-to-r from-blue-600 to-purple-600 bg-clip-text text-transparent">
-          Graphics Overview
+          Payment Summary (Last 6 Months)
         </CardTitle>
         
       </CardHeader>

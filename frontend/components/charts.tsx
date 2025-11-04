@@ -39,7 +39,7 @@ export default function Charts({ status }: Props) {
   return (
     <div className="w-full p-4 bg-white shadow-md rounded-2xl">
       <div className="flex justify-between items-center mb-3">
-        <h2 className="text-lg font-semibold">Payment Summary (Last 6 Months)</h2>
+       
 
         {!status && (
           <select
@@ -56,7 +56,7 @@ export default function Charts({ status }: Props) {
 
       <ResponsiveContainer width="100%" height={300}>
         <AreaChart data={data}>
-          <CartesianGrid strokeDasharray="3 3" />
+          
           <XAxis dataKey="month" />
           <YAxis />
           <Tooltip />
