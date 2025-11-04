@@ -37,20 +37,20 @@ export default function Home() {
     <div className="min-h-screen bg-gradient-to-br from-slate-50 via-blue-50 to-indigo-50 dark:from-slate-950 dark:via-blue-950 dark:to-indigo-950">
       <div className="container mx-auto px-4 py-6 space-y-6">
         <DashboardHeader />
-        <Graphics />
+        
         <StatsCards />
         
         <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
           <div className="lg:col-span-2 space-y-6">
             
             <PaymentTabs />
-           <RecentTransactions />
+           
           </div>
           
           <div className="space-y-6">
             <PaymentCalendar />
+            <RecentTransactions />
             
-            <Analytics />
           </div>
         </div>
       </div>

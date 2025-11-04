@@ -37,7 +37,7 @@ export default function Charts({ status }: Props) {
   const color = active === "success" ? "#22c55e" : active === "failed" ? "#ef4444" : "#f59e0b";
 
   return (
-    <div className="w-full p-4 bg-white shadow-md rounded-2xl">
+    <div >
       <div className="flex justify-between items-center mb-3">
        
 
