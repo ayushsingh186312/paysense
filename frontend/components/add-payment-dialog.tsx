@@ -6,6 +6,7 @@ import { Button } from "@/components/ui/button";
 import {
   Dialog,
   DialogContent,
+  DialogDescription,
   DialogHeader,
   DialogTitle,
   DialogTrigger,
@@ -36,6 +37,7 @@ export function AddPaymentDialog() {
   const [loading, setLoading] = useState(false);
   const [selectedClient, setSelectedClient] = useState("");
   const [ocrData, setOcrData] = useState<any>(null);
+  const [paymentMethod, setPaymentMethod] = useState("UPI");
 
   const { addCheque, addCashTransaction, addOnlineTransaction, clients } = usePaymentStore();
   const { toast } = useToast();
@@ -164,7 +166,7 @@ export function AddPaymentDialog() {
           clientName:
             (formData.get("clientName") as string) || selectedClientData?.name,
           receiptNumber: formData.get("receiptNumber") as string,
-          paymentMethod: formData.get("paymentMethod") as string,
+          paymentMethod: paymentMethod,
           amount: parseFloat(formData.get("amount") as string),
           date: formData.get("date") as string,
           status: formData.get("status") || status,
@@ -281,16 +283,12 @@ export function AddPaymentDialog() {
         </DialogTrigger>
         <DialogContent
           className="sm:max-w-[600px] max-h-[90vh] overflow-y-auto"
-          aria-describedby="add-payment-description"
         >
           <DialogHeader>
             <DialogTitle>Add New Payment</DialogTitle>
-            <p
-              id="add-payment-description"
-              className="text-sm text-muted-foreground sr-only"
-            >
+            <DialogDescription>
               Fill in the form to add a new payment transaction
-            </p>
+            </DialogDescription>
           </DialogHeader>
 
           
@@ -429,7 +427,10 @@ export function AddPaymentDialog() {
 
                 <div className="space-y-2">
                   <Label htmlFor="paymentMethod">Payment Method</Label>
-                  <Select name="paymentMethod" defaultValue="UPI">
+                  <Select 
+                    value={paymentMethod} 
+                    onValueChange={setPaymentMethod}
+                  >
                     <SelectTrigger>
                       <SelectValue placeholder="Select method" />
                     </SelectTrigger>
@@ -521,7 +522,7 @@ export function AddPaymentDialog() {
                 {loading ? "Redirecting to Payment..." : "Pay Now with Stripe"}
               </Button>
               <p className="text-xs text-center text-muted-foreground mt-2">
-                Or fill the form below to record a manual transaction
+                Or click below to record a manual transaction
               </p>
             </div>
           )}
