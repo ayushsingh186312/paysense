@@ -168,51 +168,9 @@ export const dashboardAPI = {
   },
 }
 
-// Analytics APIs
-export const analyticsAPI = {
-  getMonthlySummary: async () => {
-    const response = await api.get('/analytics/monthly-summary')
-    return response.data
-  },
-  
-  getPaymentTrends: async () => {
-    const response = await api.get('/analytics/payment-trends')
-    return response.data
-  },
-}
 
-// Invoice APIs
-export const invoiceAPI = {
-  getAll: async () => {
-    const response = await api.get('/invoices')
-    return response.data
-  },
-  
-  getById: async (id: string) => {
-    const response = await api.get(`/invoices/${id}`)
-    return response.data
-  },
-  
-  create: async (data: any) => {
-    const response = await api.post('/invoices', data)
-    return response.data
-  },
-  
-  update: async (id: string, data: any) => {
-    const response = await api.put(`/invoices/${id}`, data)
-    return response.data
-  },
-  
-  delete: async (id: string) => {
-    const response = await api.delete(`/invoices/${id}`)
-    return response.data
-  },
-  
-  autoReconcile: async () => {
-    const response = await api.post('/invoices/reconcile')
-    return response.data
-  },
-}
+
+
 
 // Client APIs
 export const clientAPI = {
@@ -263,18 +221,7 @@ export const ocrAPI = {
   },
 }
 
-// Notification APIs
-export const notificationAPI = {
-  sendPDCReminder: async (data: any) => {
-    const response = await api.post('/notifications/send-pdc-reminder', data)
-    return response.data
-  },
-  
-  sendBounceNotification: async (data: any) => {
-    const response = await api.post('/notifications/send-bounce-notification', data)
-    return response.data
-  },
-}
+
 
 // Stripe APIs
 export const stripeAPI = {

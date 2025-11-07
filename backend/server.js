@@ -33,8 +33,6 @@ const onlineRoutes = require('./routes/online.routes');
 const analyticsRoutes = require('./routes/analytics.routes');
 const clientRoutes = require('./routes/client.routes');
 const ocrRoutes = require('./routes/ocr.routes');
-const notificationRoutes = require('./routes/notification.routes');
-const invoiceRoutes = require('./routes/invoice.routes');
 const stripeRoutes = require('./routes/stripe.routes');
 
 // Health check
@@ -61,8 +59,6 @@ app.use('/api/online', onlineRoutes);
 app.use('/api/analytics', analyticsRoutes);
 app.use('/api/clients', clientRoutes);
 app.use('/api/ocr', ocrRoutes);
-app.use('/api/notifications', notificationRoutes);
-app.use('/api/invoices', invoiceRoutes);
 app.use('/api/stripe', stripeRoutes);
 
 // Error handling
