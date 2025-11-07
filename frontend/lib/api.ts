@@ -276,6 +276,41 @@ export const notificationAPI = {
   },
 }
 
+// Stripe APIs
+export const stripeAPI = {
+  createCheckoutSession: async (data: {
+    amount: number
+    currency?: string
+    metadata?: any
+  }) => {
+    const response = await api.post('/stripe/create-checkout-session', data)
+    return response.data
+  },
+
+  verifySession: async (sessionId: string) => {
+    const response = await api.get(`/stripe/verify-session/${sessionId}`)
+    return response.data
+  },
+
+  createPaymentIntent: async (data: {
+    amount: number
+    currency?: string
+    metadata?: any
+  }) => {
+    const response = await api.post('/stripe/create-payment-intent', data)
+    return response.data
+  },
+
+  refundPayment: async (data: {
+    paymentIntentId: string
+    amount?: number
+    reason?: string
+  }) => {
+    const response = await api.post('/stripe/refund', data)
+    return response.data
+  },
+}
+
 // Health check
 export const checkBackendHealth = async () => {
   try {

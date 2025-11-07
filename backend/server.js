@@ -15,7 +15,7 @@ app.use(cors({
     'http://127.0.0.1:3000',
     'https://localhost:3000',
     'https://paysense-cyvu.vercel.app',
-    
+    'https://paysense-theta.vercel.app',
   ],
   credentials: true,
   methods: ['GET', 'POST', 'PUT', 'PATCH', 'DELETE', 'OPTIONS'],
@@ -35,6 +35,7 @@ const clientRoutes = require('./routes/client.routes');
 const ocrRoutes = require('./routes/ocr.routes');
 const notificationRoutes = require('./routes/notification.routes');
 const invoiceRoutes = require('./routes/invoice.routes');
+const stripeRoutes = require('./routes/stripe.routes');
 
 // Health check
 app.get('/', (req, res) => {
@@ -62,6 +63,7 @@ app.use('/api/clients', clientRoutes);
 app.use('/api/ocr', ocrRoutes);
 app.use('/api/notifications', notificationRoutes);
 app.use('/api/invoices', invoiceRoutes);
+app.use('/api/stripe', stripeRoutes);
 
 // Error handling
 app.use((err, req, res, next) => {

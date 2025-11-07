@@ -25,6 +25,8 @@ import { OCRUpload } from "./ocr-upload";
 import { ClientSelector } from "./client-selector";
 import { AddClientDialog } from "./add-client-dialog";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
+import { loadStripe } from "@stripe/stripe-js";
+import { stripeAPI } from "@/lib/api";
 
 export function AddPaymentDialog() {
   const [open, setOpen] = useState(false);
@@ -56,6 +58,66 @@ export function AddPaymentDialog() {
         (form.elements.namedItem("bankName") as HTMLInputElement).value =
           data.bankName;
       }
+    }
+  };
+
+  // Handle Stripe Payment (Pay Now button)
+  const handlePayNow = async () => {
+    if (paymentType !== "online") return;
+
+    const form = document.getElementById("payment-form") as HTMLFormElement;
+    if (!form) {
+      toast({
+        title: "❌ Error",
+        description: "Payment form not found",
+        variant: "destructive",
+      });
+      return;
+    }
+
+    const formData = new FormData(form);
+    const amountStr = (formData.get("amount") as string) || "";
+    const amount = parseFloat(amountStr);
+
+    if (!amount || isNaN(amount) || amount <= 0) {
+      toast({
+        title: "❌ Invalid Amount",
+        description: "Please enter a valid amount before paying",
+        variant: "destructive",
+      });
+      return;
+    }
+
+    setLoading(true);
+    try {
+      const selectedClientData = clients.find((c) => c._id === selectedClient);
+      
+      // Create Stripe Checkout Session
+      const { sessionId, url } = await stripeAPI.createCheckoutSession({
+        amount: Math.round(amount * 100), // Convert to paise
+        currency: "inr",
+        metadata: {
+          clientId: selectedClient || "",
+          clientName: (formData.get("clientName") as string) || selectedClientData?.name || "Unknown",
+          receiptNumber: (formData.get("receiptNumber") as string) || "",
+          paymentMethod: (formData.get("paymentMethod") as string) || "Card",
+        },
+      });
+
+      // Redirect to Stripe Checkout
+      if (url) {
+        window.location.href = url;
+      } else {
+        throw new Error("No checkout URL received from server");
+      }
+    } catch (err: any) {
+      console.error("Stripe checkout error:", err);
+      toast({
+        title: "❌ Payment Error",
+        description: err.message || "Failed to start payment",
+        variant: "destructive",
+      });
+      setLoading(false);
     }
   };
 
@@ -230,6 +292,25 @@ export function AddPaymentDialog() {
               Fill in the form to add a new payment transaction
             </p>
           </DialogHeader>
+
+          {/* Show Pay Now button only when online payment type is selected */}
+          {paymentType === "online" && open && (
+            <div className="mb-4">
+              <Button
+                type="button"
+                onClick={handlePayNow}
+                disabled={loading}
+                className="w-full bg-gradient-to-r from-pink-500 via-orange-400 to-yellow-300 hover:from-pink-600 hover:via-orange-500 hover:to-yellow-400"
+              >
+                <Plus className="h-4 w-4 mr-2" />
+                {loading ? "Redirecting to Payment..." : "Pay Now with Stripe"}
+              </Button>
+              <p className="text-xs text-center text-muted-foreground mt-2">
+                Or fill the form below to record a manual transaction
+              </p>
+            </div>
+          )}
+
           <form id="payment-form" onSubmit={handleSubmit} className="space-y-4">
             <div className="space-y-2">
               <Label>Payment Type</Label>
@@ -401,7 +482,7 @@ export function AddPaymentDialog() {
                     </SelectContent>
                   </Select>
                 </div>
-
+                
               </>
             ) : (
               <>

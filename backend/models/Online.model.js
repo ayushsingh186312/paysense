@@ -53,6 +53,18 @@ const OnlineSchema = new mongoose.Schema({
   notes: {
     type: String,
   },
+  // Stripe-specific fields
+  stripeSessionId: {
+    type: String,
+    sparse: true,
+  },
+  stripePaymentIntentId: {
+    type: String,
+    sparse: true,
+  },
+  referenceNumber: {
+    type: String,
+  },
 }, {
   timestamps: true,
 });
