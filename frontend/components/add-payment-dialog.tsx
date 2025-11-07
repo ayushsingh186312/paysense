@@ -293,23 +293,7 @@ export function AddPaymentDialog() {
             </p>
           </DialogHeader>
 
-          {/* Show Pay Now button only when online payment type is selected */}
-          {paymentType === "online" && open && (
-            <div className="mb-4">
-              <Button
-                type="button"
-                onClick={handlePayNow}
-                disabled={loading}
-                className="w-full bg-gradient-to-r from-pink-500 via-orange-400 to-yellow-300 hover:from-pink-600 hover:via-orange-500 hover:to-yellow-400"
-              >
-                <Plus className="h-4 w-4 mr-2" />
-                {loading ? "Redirecting to Payment..." : "Pay Now with Stripe"}
-              </Button>
-              <p className="text-xs text-center text-muted-foreground mt-2">
-                Or fill the form below to record a manual transaction
-              </p>
-            </div>
-          )}
+          
 
           <form id="payment-form" onSubmit={handleSubmit} className="space-y-4">
             <div className="space-y-2">
@@ -524,7 +508,23 @@ export function AddPaymentDialog() {
                 </div>
               </>
             )}
-
+            {/* Show Pay Now button only when online payment type is selected */}
+          {paymentType === "online" && open && (
+            <div className="mb-4">
+              <Button
+                type="button"
+                onClick={handlePayNow}
+                disabled={loading}
+                className="w-full bg-gradient-to-r from-pink-500 via-orange-400 to-yellow-300 hover:from-pink-600 hover:via-orange-500 hover:to-yellow-400"
+              >
+                <Plus className="h-4 w-4 mr-2" />
+                {loading ? "Redirecting to Payment..." : "Pay Now with Stripe"}
+              </Button>
+              <p className="text-xs text-center text-muted-foreground mt-2">
+                Or fill the form below to record a manual transaction
+              </p>
+            </div>
+          )}
             <Button
               type="submit"
               className="w-full bg-gradient-to-r from-blue-600 to-purple-600"
